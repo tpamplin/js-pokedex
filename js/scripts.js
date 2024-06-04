@@ -1,4 +1,7 @@
+//Pokedex Program!
+//Timothy Pamplin 2024
 
+//Pokemon data set.
 let pokemonList = [
     {
         name: "Bulbasaur",
@@ -55,25 +58,35 @@ let pokemonList = [
     }
 ];
 
-
+//establish variable to hold the height of the tallest pokemon
 let tallestHeight = 0;
 
+//find height of tallest pokemon
+//checks every pokemon in pokemonList to see if it is the tallest in the list.
+//sets tallestHeight to the height of the current pokemon if it is the tallest so far.
 for (let i = 0; i < pokemonList.length; i++){
+    //check if current pokemon is taller than tallest so far.
     if (pokemonList[i].height > tallestHeight){
+        //set tallest height variable to current pokemon height.
         tallestHeight = pokemonList[i].height;
-        console.log(tallestHeight);
     }
-
 };
 
+/*
+write data to page
 
+cycles through each pokemon and writes its name and height to the page, 
+also indentifies any pokemon whose height is equal to the tallest height
+and writes special message accordingly
+*/
 for (let i = 0; i < pokemonList.length; i++){
+    //write the name and height of the current pokemon.
     document.write(`Name: ${pokemonList[i].name} <br>Height: ${pokemonList[i].height} <br>`);
-    console.log(pokemonList[1].height);
-
+    //check to see if the current pokemon's height is the same as the tallest pokemon's height.
     if (pokemonList[i].height == tallestHeight){
+        //if this is the tallest pokemon, tell me about it!
         document.write('WOW! that\'s so tall!<br>');
-    }
-
+    };
+    //add an extra line break after each pokemon.
     document.write('<br>');
 };
