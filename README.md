@@ -1,0 +1,1 @@
+A simple pokedex app written in javascript. It can show you relevant information about any pokemon you desire!
