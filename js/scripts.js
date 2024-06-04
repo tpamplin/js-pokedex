@@ -53,3 +53,11 @@ let pokemonList = [
         types: ["Water"]
     }
 ];
+
+
+for (let i = 0; i < pokemonList.length; i++){
+    document.write(`Name: ${pokemonList[i].name} <br>Height: ${pokemonList[i].height} <br>`);
+    console.log(pokemonList[1].height);
+
+    document.write('<br>');
+};
