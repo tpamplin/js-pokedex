@@ -1,3 +1,4 @@
+
 let pokemonList = [
     {
         name: "Bulbasaur",
@@ -55,9 +56,24 @@ let pokemonList = [
 ];
 
 
+let tallestHeight = 0;
+
+for (let i = 0; i < pokemonList.length; i++){
+    if (pokemonList[i].height > tallestHeight){
+        tallestHeight = pokemonList[i].height;
+        console.log(tallestHeight);
+    }
+
+};
+
+
 for (let i = 0; i < pokemonList.length; i++){
     document.write(`Name: ${pokemonList[i].name} <br>Height: ${pokemonList[i].height} <br>`);
     console.log(pokemonList[1].height);
+
+    if (pokemonList[i].height == tallestHeight){
+        document.write('WOW! that\'s so tall!<br>');
+    }
 
     document.write('<br>');
 };
