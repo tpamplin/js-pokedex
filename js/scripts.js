@@ -3,4 +3,4 @@ let favoriteFood = 'Tacos';
 
 alert('Hello World!');
 
-document.write(favoriteFood);
+document.write('My favorite food is: ', favoriteFood);
