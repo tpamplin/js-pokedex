@@ -81,11 +81,11 @@ and writes special message accordingly
 */
 for (let i = 0; i < pokemonList.length; i++){
     //write the name and height of the current pokemon.
-    document.write(`Name: ${pokemonList[i].name} <br>Height: ${pokemonList[i].height} <br>`);
+    document.write(`${pokemonList[i].name} -- Height: ${pokemonList[i].height} cm<br>`);
     //check to see if the current pokemon's height is the same as the tallest pokemon's height.
     if (pokemonList[i].height == tallestHeight){
         //if this is the tallest pokemon, tell me about it!
-        document.write('WOW! that\'s so tall!<br>');
+        document.write('WOW! that\'s big!<br>');
     };
     //add an extra line break after each pokemon.
     document.write('<br>');
