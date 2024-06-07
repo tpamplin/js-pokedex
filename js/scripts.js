@@ -75,12 +75,37 @@ let pokemonRepository = (function(){
     function getAll () {
 
         return pokemonList;
-    }
+    };
 
     return {
 
         add: add,
         getAll: getAll
+    };
+})();
+
+let tallestContainer = (function(){
+    
+    let tallestHeight = 0;
+
+    function compare(height){
+
+        if (height > tallestHeight){
+        
+            tallestHeight = height;
+        };
+    };
+
+    function getTallestHeight(){
+
+        return tallestHeight;
+    };
+
+    return{
+
+        compare: compare,
+        getTallestHeight: getTallestHeight
+
     };
 })();
 
