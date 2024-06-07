@@ -9,6 +9,7 @@ height
 type
 
 */
+
 let pokemonList = [
     {
         name: "Bulbasaur",
@@ -64,28 +65,6 @@ let pokemonList = [
         types: ["Water"]
     }
 ];
-
-//establish variable to hold the height of the tallest pokemon
-let tallestHeight = 0;
-
-/* find height of tallest pokemon
-
-checks every pokemon in pokemonList to see if it is the tallest in the list.
-sets tallestHeight to the height of the current pokemon if it is the tallest so far.
-
-*/
-for (let i = 0; i < pokemonList.length; i++){
-    
-    //set variables for pokemon name and height to improve readability.
-    let thisPokemonHeight = pokemonList[i].height;
-    
-    //check if current pokemon is taller than tallest so far.
-    if (thisPokemonHeight > tallestHeight){
-    
-        //set tallest height variable to current pokemon height.
-        tallestHeight = thisPokemonHeight;
-    }
-};
 
 /* write data to page
 
