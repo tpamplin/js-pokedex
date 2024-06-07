@@ -84,6 +84,13 @@ let pokemonRepository = (function(){
     };
 })();
 
+pokemonRepository.add(
+    {
+        name: "Caterpie",
+        height: 30
+    }
+);
+
 /* write data to page
 
 cycles through each pokemon and writes its name and height to the page, 
@@ -93,8 +100,6 @@ and writes special message accordingly
 */
 
 pokemonRepository.getAll().forEach(function(pokemon){
-
-    
     //write the name and height of the current pokemon.
     document.write(pokemon.name, ' -- Height: ', pokemon.height, ' cm<br>');
 });
