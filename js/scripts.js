@@ -92,22 +92,9 @@ and writes special message accordingly
 
 */
 
+pokemonRepository.getAll().forEach(function(pokemon){
 
-for (let i = 0; i < pokemonList.length; i++){
-
-    //set variables for pokemon name and height to improve readability.
-    let thisPokemonName = pokemonList[i].name;
-    let thisPokemonHeight = pokemonList[i].height;
     
     //write the name and height of the current pokemon.
-    document.write(`${thisPokemonName} -- Height: ${thisPokemonHeight} cm<br>`);
-    
-    //check to see if the current pokemon's height is the same as the tallest pokemon's height.
-    if (thisPokemonHeight == tallestHeight){
-        
-        //if this is the tallest pokemon, tell me about it!
-        document.write('WOW! that\'s big!<br>');
-    };
-    //add an extra line break after each pokemon.
-    document.write('<br>');
-};
+    document.write(pokemon.name, ' -- Height: ', pokemon.height, ' cm<br>');
+});
