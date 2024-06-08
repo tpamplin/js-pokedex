@@ -9,7 +9,6 @@ height
 type
 
 */
-
 let pokemonRepository = (function(){
 
     let pokemonList = [
@@ -84,6 +83,13 @@ let pokemonRepository = (function(){
     };
 })();
 
+
+/*tallest container
+
+    compare: input a pokemon height and if it is the tallest one it has compared to, then it logs its height to the tallestHeight variable.
+    getTallestHeight: returns the tallestHeight variable
+
+*/
 let tallestContainer = (function(){
     
     let tallestHeight = 0;
@@ -109,6 +115,7 @@ let tallestContainer = (function(){
     };
 })();
 
+//example of adding a pokemon to the repository
 pokemonRepository.add(
     {
         name: "Caterpie",
@@ -116,36 +123,42 @@ pokemonRepository.add(
     }
 );
 
+//compare pokemon height to tallest height and print message if they are equal
 function tallestMessage(tHeight, pHeight){
     if (tHeight === pHeight){
         document.write(' -- Wow, that\'s big!');
     };
 };
 
+//write information about one pokemon to the screen, and a special message if it is the tallest one on the list
 function printPokemon(pokemon){
-    
-    tallestHeight = tallestContainer.getTallestHeight();
+
     //write the name and height of the current pokemon.
     document.write(pokemon.name, ' -- Height: ', pokemon.height, ' cm');
-    
-    tallestMessage(tallestHeight, pokemon.height);
+};
 
-    document.write('<br>');
-
+//add a line break
+function lineBreak(){
+    document.write('<br>')
 }
 
+//finds the tallest pokemon and sets the tallestHeight variable to that height.
+function findTallestHeight(allPokemon){
 
-pokemonRepository.getAll().forEach(function(pokemon){
+    allPokemon.forEach(function(pokemon){
+        tallestContainer.compare(pokemon.height);
+    });
+}
 
-    tallestContainer.compare(pokemon.height);
-});
+//takes pokedex as an input and runs the printPokemon function on each pokemon object in the array
+function writeData(allPokemon, tallestHeight){
+    allPokemon.forEach(function(pokemon){
+        printPokemon(pokemon);
+        tallestMessage(tallestHeight, pokemon.height);
+        lineBreak();
+        
+    });
+};
 
-/* write data to page
-
-cycles through each pokemon and writes its name and height to the page, 
-also indentifies any pokemon whose height is equal to the tallest height
-and writes special message accordingly
-
-*/
-
-pokemonRepository.getAll().forEach(printPokemon);
+findTallestHeight(pokemonRepository.getAll());
+writeData(pokemonRepository.getAll(), tallestContainer.getTallestHeight());
