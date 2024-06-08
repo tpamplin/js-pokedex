@@ -73,8 +73,24 @@ let pokemonRepository = (function(){
         }
     ];
 
+    //use this function to add pokemon to the pokedex.
+    //must be an object with the correct keys.
     function add(pokemon) {
-        pokemonList.push(pokemon);
+
+        //stringify object keys so they can be compared as strings.
+        pokemonKeys = JSON.stringify(Object.keys(pokemon));
+        compareKeys = JSON.stringify(Object.keys(pokemonList[0]));
+
+        //check to make sure submission is an object with all the correct keys
+        if ((typeof pokemon === "object") && (pokemonKeys === compareKeys)){
+            //pushes pokemon to the pokemonList.    
+            pokemonList.push(pokemon);
+        }
+        //catch any submission that is not an object or has incorrect object keys.
+        else {
+            //log error message to the console.
+            console.log("Invalid: Not an object or keys don't match");
+        };
     };
 
     function getAll () {
@@ -129,7 +145,8 @@ let tallestContainer = (function(){
 pokemonRepository.add(
     {
         name: "Caterpie",
-        height: 30
+        height: 30,
+        types: ["bug"]
     }
 );
 
