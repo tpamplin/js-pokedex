@@ -3,10 +3,16 @@
 
 /* Pokemon Data Set
 
+    contains an array of pokemon objects.
+
 Each pokemon has 3 properties:
-name
-height
-type
+    name
+    height
+    type
+
+access with:
+    add: input an object to add it to the pokedex
+    getAll: returns the entire array for further processing.
 
 */
 let pokemonRepository = (function(){
@@ -83,9 +89,11 @@ let pokemonRepository = (function(){
     };
 })();
 
-
 /*tallest container
 
+    contains the height of the tallest pokemon that has been compared to it.
+
+access with:
     compare: input a pokemon height and if it is the tallest one it has compared to, then it logs its height to the tallestHeight variable.
     getTallestHeight: returns the tallestHeight variable
 
@@ -115,6 +123,8 @@ let tallestContainer = (function(){
     };
 })();
 
+//Data Manipulation
+
 //example of adding a pokemon to the repository
 pokemonRepository.add(
     {
@@ -122,6 +132,8 @@ pokemonRepository.add(
         height: 30
     }
 );
+
+//Function declarations
 
 //compare pokemon height to tallest height and print message if they are equal
 function tallestMessage(tHeight, pHeight){
@@ -160,5 +172,10 @@ function writeData(allPokemon, tallestHeight){
     });
 };
 
+//call functions and execute program
+
+//find height of the tallest pokemon
 findTallestHeight(pokemonRepository.getAll());
+
+//print all data to the screen
 writeData(pokemonRepository.getAll(), tallestContainer.getTallestHeight());
