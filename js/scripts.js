@@ -146,7 +146,7 @@ pokemonRepository.add(
     {
         name: "Caterpie",
         height: 30,
-        types: ["bug"]
+        types: ["Bug", "Grass"]
     }
 );
 
@@ -156,24 +156,18 @@ pokemonRepository.add(
 function tallestMessage(tHeight, pHeight){
     if (tHeight === pHeight){
         document.write(' -- Wow, that\'s big!');
-    };
+    }
 };
 
 //write information about one pokemon to the screen, and a special message if it is the tallest one on the list
 function printPokemon(pokemon){
 
     //write the name and height of the current pokemon.
-    document.write(pokemon.name, ' -- Height: ', pokemon.height, ' cm');
+    document.write(pokemon.name, ' -- Height: ', pokemon.height, ' cm -- types: ', pokemon.types.map((p) => ` ${p}`));
 };
-
-//add a line break
-function lineBreak(){
-    document.write('<br>')
-}
 
 //finds the tallest pokemon and sets the tallestHeight variable to that height.
 function findTallestHeight(allPokemon){
-
     allPokemon.forEach(function(pokemon){
         tallestContainer.compare(pokemon.height);
     });
@@ -184,8 +178,7 @@ function writeData(allPokemon, tallestHeight){
     allPokemon.forEach(function(pokemon){
         printPokemon(pokemon);
         tallestMessage(tallestHeight, pokemon.height);
-        lineBreak();
-        
+        document.write('<br>');
     });
 };
 
