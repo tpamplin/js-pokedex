@@ -1,0 +1,61 @@
+:root{
+
+    --light-border: 3px solid rgba(255,255,255,0.3);
+    --dark-border:3px solid rgba(0,0,0,0.3);
+
+    --default-background-color: #fdfcdc;
+    --button-color:#fed9b7;
+    --button-text-hover:#8800ff;
+
+    --default-spacing: 10px;
+
+}
+
+body{
+    background-color:var(--default-background-color);
+}
+
+.pokemon-list{
+    list-style-type:none;
+    padding:0;
+    margin: var(--default-spacing, auto);
+}
+
+/*
+    camel case class names are created by javascript
+*/
+
+.pokemonButton {
+
+    background-color: var(--button-color);
+
+    border-top: var(--light-border);
+    border-left: var(--light-border);
+    border-bottom: var(--dark-border);
+    border-right: var(--dark-border);
+
+    font-size:24px;
+    font-weight:bold;
+    text-align:center;
+
+    width: 30%;
+
+    margin: var(--default-spacing) auto;
+    
+
+
+}
+
+.pokemonButton:hover{
+    color: var(--button-text-hover);
+}
+
+.pokemonButton:active{
+
+    border-top: var(--dark-border);
+    border-left: var(--dark-border);
+    border-bottom: var(--light-border);
+    border-right: var(--light-border);
+
+}
+

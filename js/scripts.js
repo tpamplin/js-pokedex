@@ -174,11 +174,19 @@ function findTallestHeight(allPokemon){
 }
 
 //takes pokedex as an input and runs the printPokemon function on each pokemon object in the array
-function writeData(allPokemon, tallestHeight){
+function writeData(allPokemon ){
     allPokemon.forEach(function(pokemon){
-        printPokemon(pokemon);
-        tallestMessage(tallestHeight, pokemon.height);
-        document.write('<br>');
+        let list = document.querySelector('.pokemon-list');
+        let listItem = document.createElement('li');
+        let button = document.createElement('button');
+
+        button.innerText = pokemon.name;
+        button.classList.add('pokemonButton');
+
+        listItem.appendChild(button);
+        list.appendChild(listItem);
+        
+
     });
 };
 
