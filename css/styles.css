@@ -13,12 +13,15 @@
 
 body{
     background-color:var(--default-background-color);
+    
 }
 
 .pokemon-list{
     list-style-type:none;
-    padding:0;
-    margin: var(--default-spacing, auto);
+    padding:0, auto;
+    margin: var(--default-spacing), auto;
+    text-align:center;
+
 }
 
 /*
@@ -39,8 +42,10 @@ body{
     text-align:center;
 
     width: 30%;
-
-    margin: var(--default-spacing) auto;
+    min-width:fit-content;
+    margin: var(--default-spacing);
+    
+    color:black;
     
 
 

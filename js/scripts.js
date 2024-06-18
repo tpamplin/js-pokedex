@@ -98,6 +98,12 @@ let pokemonRepository = (function(){
         return pokemonList;
     };
 
+    function showDetails (pokemon){
+
+        console.log(pokemon.name);
+    
+    }
+
     function addListItem (pokemon){
 
         let list = document.querySelector('.pokemon-list');
@@ -109,8 +115,14 @@ let pokemonRepository = (function(){
 
         listItem.appendChild(button);
         list.appendChild(listItem);
+
+        button.addEventListener('click', function(event){
+            showDetails(pokemon);
+        });
         
     }
+
+
 
     return {
 
