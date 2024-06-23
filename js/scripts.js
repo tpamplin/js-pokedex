@@ -94,14 +94,11 @@ let pokemonRepository = (function(){
     };
 
     function getAll () {
-
         return pokemonList;
     };
 
     function showDetails (pokemon){
-
-        console.log(pokemon.name);
-    
+        console.log(pokemon.name);    
     }
 
     function addListItem (pokemon){
@@ -109,7 +106,6 @@ let pokemonRepository = (function(){
         let list = document.querySelector('.pokemon-list');
         let listItem = document.createElement('li');
         let button = document.createElement('button');
-
         button.innerText = pokemon.name;
         button.classList.add('pokemonButton');
 
@@ -122,47 +118,11 @@ let pokemonRepository = (function(){
         
     }
 
-
-
     return {
 
         add: add,
         getAll: getAll,
         addListItem: addListItem
-    };
-})();
-
-/*tallest container
-
-    contains the height of the tallest pokemon that has been compared to it.
-
-access with:
-    compare: input a pokemon height and if it is the tallest one it has compared to, then it logs its height to the tallestHeight variable.
-    getTallestHeight: returns the tallestHeight variable
-
-*/
-let tallestContainer = (function(){
-    
-    let tallestHeight = 0;
-
-    function compare(height){
-
-        if (height > tallestHeight){
-        
-            tallestHeight = height;
-        };
-    };
-
-    function getTallestHeight(){
-
-        return tallestHeight;
-    };
-
-    return{
-
-        compare: compare,
-        getTallestHeight: getTallestHeight
-
     };
 })();
 
@@ -178,37 +138,4 @@ pokemonRepository.add(
 );
 
 //Function declarations
-
-//compare pokemon height to tallest height and print message if they are equal
-function tallestMessage(tHeight, pHeight){
-    if (tHeight === pHeight){
-        document.write(' -- Wow, that\'s big!');
-    }
-};
-
-//write information about one pokemon to the screen, and a special message if it is the tallest one on the list
-function printPokemon(pokemon){
-
-    //write the name and height of the current pokemon.
-    document.write(pokemon.name, ' -- Height: ', pokemon.height, ' cm -- types: ', pokemon.types.map((p) => ` ${p}`));
-};
-
-//finds the tallest pokemon and sets the tallestHeight variable to that height.
-function findTallestHeight(allPokemon){
-    allPokemon.forEach(function(pokemon){
-        tallestContainer.compare(pokemon.height);
-    });
-}
-
-//takes pokedex as an input and runs the printPokemon function on each pokemon object in the array
-function writeData(allPokemon ){
-    allPokemon.forEach(pokemonRepository.addListItem);
-};
-
-//call functions and execute program
-
-//find height of the tallest pokemon
-findTallestHeight(pokemonRepository.getAll());
-
-//print all data to the screen
-writeData(pokemonRepository.getAll(), tallestContainer.getTallestHeight());
+pokemonRepository.getAll().forEach(pokemonRepository.addListItem);
