@@ -1,77 +1,13 @@
 //Pokedex Program!
 //Timothy Pamplin 2024
 
-/* Pokemon Data Set
 
-    contains an array of pokemon objects.
-
-Each pokemon has 3 properties:
-    name
-    height
-    type
-
-access with:
-    add: input an object to add it to the pokedex
-    getAll: returns the entire array for further processing.
-
-*/
 let pokemonRepository = (function(){
 
-    let pokemonList = [
-        {
-            name: "Bulbasaur",
-            height: 70,
-            types: ["Grass", "Poison"]
-        }, 
+    let pokemonList = [];
+    let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
 
-        {
-            name: "Ivysaur",
-            height: 100,
-            types: ["Grass", "Poison"]
-        }, 
 
-        {
-            name: "Venusaur",
-            height: 200,
-            types: ["Grass", "Poison"]
-        }, 
-
-        {
-            name: "Charmander",
-            height: 60,
-            types: ["Fire"]
-        },
-
-        {
-            name: "Charmeleon",
-            height: 110,
-            types: ["Fire"]
-        }, 
-
-        {
-            name: "Charizard",
-            height: 170,
-            types: ["Fire", "Flying"]
-        }, 
-
-        {
-            name: "Squirtle",
-            height: 50,
-            types: ["Water"]
-        },
-
-        {
-            name: "Wartortle",
-            height: 100,
-            types: ["Water"]
-        }, 
-
-        {
-            name: "Blastoise",
-            height: 160,
-            types: ["Water"]
-        }
-    ];
 
     //use this function to add pokemon to the pokedex.
     //must be an object with the correct keys.
@@ -79,7 +15,7 @@ let pokemonRepository = (function(){
 
         //stringify object keys so they can be compared as strings.
         pokemonKeys = JSON.stringify(Object.keys(pokemon));
-        compareKeys = JSON.stringify(Object.keys(pokemonList[0]));
+        compareKeys = '["name","detailsUrl"]';
 
         //check to make sure submission is an object with all the correct keys
         if ((typeof pokemon === "object") && (pokemonKeys === compareKeys)){
@@ -92,15 +28,13 @@ let pokemonRepository = (function(){
             console.log("Invalid: Not an object or keys don't match");
         };
     };
-
+    
+    //use this function to retrieve the data from the IIFE as an array of pokemon objects, each with a name and url for more details
     function getAll () {
         return pokemonList;
     };
 
-    function showDetails (pokemon){
-        console.log(pokemon.name);    
-    }
-
+    //this function creates a button element on the DOM for any given pokemon that it is called on.
     function addListItem (pokemon){
 
         let list = document.querySelector('.pokemon-list');
@@ -110,32 +44,92 @@ let pokemonRepository = (function(){
         button.classList.add('pokemonButton');
 
         listItem.appendChild(button);
-        list.appendChild(listItem);
 
-        button.addEventListener('click', function(event){
-            showDetails(pokemon);
+        button.addEventListener('click', function(){
+            
+            hideDetails();
+            showDetails(pokemon, listItem);
+
         });
         
-    }
+
+        list.appendChild(listItem);
+    };
+
+    //this function loads a list of pokemon objects, and adds each one to the pokemonList.
+    function loadList() {
+        
+        return fetch(apiUrl).then(function (response) {
+            return response.json();
+        }).then(function (json) {
+            json.results.forEach(function (item){
+                let pokemon = {
+                    name:item.name,
+                    detailsUrl:item.url
+                };
+                add(pokemon);
+            });
+        }).catch(function (error) {
+            console.error(error);
+        });
+    };
+
+    //loads more details about a specific pokemon
+    function loadDetails(item) {
+
+        let url = item.detailsUrl;
+        
+        return fetch(url).then(function (response) {
+                return response.json();
+            }).then(function (details) {
+        
+            item.imageUrl = details.sprites.front_default;
+            item.height = details.height;
+            item.types = details.types
+        
+
+        }).catch(function(error){
+            console.error(error);
+        });
+    };
+
+    //waits for details to be loaded and adds it to the DOM
+    function showDetails (pokemon, listItem){
+        loadDetails(pokemon).then(function(){
+            console.log("showDetails: pokemon = ", pokemon);
+
+            let detailsDisplay = document.createElement('p');
+            let displayText = ("Height: " + pokemon.height);
+            
+            detailsDisplay.innerText = displayText;
+            detailsDisplay.classList.add('pokemonDetails');
+
+            listItem.appendChild(detailsDisplay);
+
+        });
+    };
+
+    //searches the DOM for a pokemon with extra details and removes the extra details.
+    function hideDetails(){
+        let pokemon = document.querySelector('.pokemonDetails');
+        if (pokemon !== null){
+            pokemon.remove()
+        };
+    };
 
     return {
-
         add: add,
         getAll: getAll,
-        addListItem: addListItem
+        loadList: loadList,
+        addListItem: addListItem,
+        loadDetails: loadDetails
     };
+
 })();
 
-//Data Manipulation
+pokemonRepository.loadList().then(function(){
+    pokemonRepository.getAll().forEach(function(pokemon){
+        pokemonRepository.addListItem(pokemon);
+    });
+});
 
-//example of adding a pokemon to the repository
-pokemonRepository.add(
-    {
-        name: "Caterpie",
-        height: 30,
-        types: ["Bug", "Grass"]
-    }
-);
-
-//Function declarations
-pokemonRepository.getAll().forEach(pokemonRepository.addListItem);
