@@ -1,19 +1,22 @@
 :root{
-
-    --light-border: 3px solid rgba(255,255,255,0.3);
-    --dark-border:3px solid rgba(0,0,0,0.3);
+    --light-border: 3px solid rgba(255, 255, 255, 0.3);
+    --dark-border:3px solid rgba(0, 0, 0, 0.3);
+    
+    --modal-background-shading:rgba(0, 0, 0, 0.5);
 
     --default-background-color: #fdfcdc;
     --button-color:#fed9b7;
     --button-text-hover:#8800ff;
 
     --default-spacing: 10px;
+}
 
+*{
+    box-sizing:border-box;
 }
 
 body{
     background-color:var(--default-background-color);
-    
 }
 
 .pokemon-list{
@@ -21,7 +24,35 @@ body{
     padding:0, auto;
     margin: var(--default-spacing), auto;
     text-align:center;
+}
 
+#modal-container{
+    position: fixed;
+    padding: 20px;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
+    background: var(--modal-background-shading);
+
+    z-index: 999;
+
+    overflow: auto;
+
+    display: grid;
+    text-align: auto;
+}
+
+.modal-close{
+    background-color: var(--button-color);
+
+    border-top: var(--light-border);
+    border-left: var(--light-border);
+    border-bottom: var(--dark-border);
+    border-right: var(--dark-border);
+
+    float:right;
 }
 
 /*
@@ -29,7 +60,6 @@ body{
 */
 
 .pokemonButton {
-
     background-color: var(--button-color);
 
     border-top: var(--light-border);
@@ -45,10 +75,7 @@ body{
     min-width:fit-content;
     margin: var(--default-spacing);
     
-    color:black;
-    
-
-
+    color:black;  
 }
 
 .pokemonButton:hover{
@@ -56,11 +83,9 @@ body{
 }
 
 .pokemonButton:active{
-
     border-top: var(--dark-border);
     border-left: var(--dark-border);
     border-bottom: var(--light-border);
     border-right: var(--light-border);
-
 }
 
