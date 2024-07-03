@@ -47,8 +47,7 @@ let pokemonRepository = (function(){
 
         button.addEventListener('click', function(){
             
-            hideDetails();
-            showDetails(pokemon, listItem);
+            showDetails(pokemon);
 
         });
         
@@ -64,7 +63,7 @@ let pokemonRepository = (function(){
         }).then(function (json) {
             json.results.forEach(function (item){
                 let pokemon = {
-                    name:item.name,
+                    name: item.name.charAt(0).toUpperCase() + item.name.slice(1),
                     detailsUrl:item.url
                 };
                 add(pokemon);
@@ -84,7 +83,7 @@ let pokemonRepository = (function(){
             }).then(function (details) {
         
             item.imageUrl = details.sprites.front_default;
-            item.height = details.height;
+            item.height = details.height * 10;
             item.types = details.types
         
 
@@ -93,39 +92,72 @@ let pokemonRepository = (function(){
         });
     };
 
-    //waits for details to be loaded and adds it to the DOM
-    function showDetails (pokemon, listItem){
+    function showModal(name, height, imageUrl) {
+
+        //find the modal container and clear it
+        let modalContainer = document.querySelector('#modal-container');
+
+
+        let modal = document.createElement('div');
+        modal.classList.add('modal')
+
+        let closeButton = document.createElement('button');
+        closeButton.classList.add('modal-close');
+        closeButton.innerText = "X";
+        closeButton.addEventListener('click', hideModal);
+
+        //create a Title for the modal with the pokemon's name
+        let modalTitle = document.createElement('h1');
+        modalTitle.innerText = name;
+
+        //create text content for the modal with the pokemon's height in cm
+        let modalContent = document.createElement('p');
+        modalContent.innerText = "This Pokemon is " + height + " cm tall.";
+
+        //create an image of the pokemon on the modal with appropriate alt text
+        let modalImage = document.createElement('img');
+        modalImage.setAttribute('src', imageUrl);
+        modalImage.setAttribute('alt', "A picture of " + name + ", a pokemon"); 
+
+        //append content to the modal
+        modal.appendChild(closeButton);
+        modal.appendChild(modalTitle);
+        modal.appendChild(modalContent);
+        modal.appendChild(modalImage);
+
+        modalContainer.appendChild(modal);
+
+        //make the modal container visible
+        modalContainer.classList.add('is-visible');
+    }
+
+    function hideModal(){
+        let modalContainer = document.querySelector('#modal-container');
+        modalContainer.innerHTML = '';
+        modalContainer.classList.remove('is-visible');
+
+    }
+
+    //waits for details to be loaded and adds a modal with details to the DOM
+    function showDetails (pokemon){
         loadDetails(pokemon).then(function(){
             console.log("showDetails: pokemon = ", pokemon);
-
-            let detailsDisplay = document.createElement('p');
-            let displayText = ("Height: " + pokemon.height);
-            
-            detailsDisplay.innerText = displayText;
-            detailsDisplay.classList.add('pokemonDetails');
-
-            listItem.appendChild(detailsDisplay);
-
+            showModal(pokemon.name, pokemon.height, pokemon.imageUrl);
         });
     };
 
-    //searches the DOM for a pokemon with extra details and removes the extra details.
-    function hideDetails(){
-        let pokemon = document.querySelector('.pokemonDetails');
-        if (pokemon !== null){
-            pokemon.remove()
-        };
-    };
 
     return {
         add: add,
         getAll: getAll,
         loadList: loadList,
         addListItem: addListItem,
-        loadDetails: loadDetails
+        showModal: showModal
     };
 
 })();
+
+
 
 pokemonRepository.loadList().then(function(){
     pokemonRepository.getAll().forEach(function(pokemon){
