@@ -21,7 +21,7 @@ body{
 
 .pokemon-list{
     list-style-type:none;
-    padding:0, auto;
+    padding:0;
     margin: var(--default-spacing), auto;
     text-align:center;
 }
@@ -41,14 +41,20 @@ body{
     overflow: auto;
 
     display: grid;
-    text-align: auto;
+    text-align: center;
 }
 
 .modal{
     margin:auto;
     display: inline-block;
+    text-align:Center;
 
     padding: var(--default-spacing);
+
+    min-width:30%;
+    max-width:50%;
+
+    border: var(--dark-border);
     
     background-color: var(--default-background-color);
 }
@@ -77,9 +83,19 @@ body{
 
 }
 
-/*
-    camel case class names are created by javascript
-*/
+.modal-title {
+    color:red;
+}
+
+.modal-content {
+    font-size: 20px;
+
+}
+
+.modal-image{
+    margin:auto;
+    width:100%;
+}
 
 .pokemonButton {
     background-color: var(--button-color);
@@ -110,4 +126,3 @@ body{
     border-bottom: var(--light-border);
     border-right: var(--light-border);
 }
-
