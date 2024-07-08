@@ -41,8 +41,9 @@ let pokemonRepository = (function(){
         let listItem = document.createElement('li');
         let button = document.createElement('button');
         button.innerText = pokemon.name;
-        button.classList.add('pokemonButton');
-
+        button.classList.add('pokemonButton', 'btn', 'btn-primary');
+        button.setAttribute("data-toggle", "modal");
+        button.setAttribute("data-target", "#detailsModal");
         listItem.appendChild(button);
 
         button.addEventListener('click', function(){
@@ -96,76 +97,6 @@ let pokemonRepository = (function(){
     function showModal(pokemon) {
 
         const {name, height, imageUrl} = pokemon;
-
-        //find the modal container and clear it
-        let modalContainer = document.querySelector('#modal-container');
-
-        //create modal
-        let modal = document.createElement('div');
-        modal.classList.add('modal')
-        
-        //create close button
-        let closeButton = document.createElement('button');
-        closeButton.classList.add('modal-close');
-        closeButton.innerText = "Close";
-
-        //close the modal when you click the close button
-        closeButton.addEventListener('click', hideModal);
-
-        //close the modal when you click out of the modal
-        modalContainer.addEventListener('click', (e) => {
-            let target = e.target;
-            if(target === modalContainer) {
-                hideModal();
-            }
-        });
-
-        //close the modal when you press the escape key
-        window.addEventListener('keydown', (e) => {
-            if(e.key === 'Escape' && modalContainer.classList.contains('is-visible')) {
-                hideModal();
-            }
-        });
-
-        //create a Title for the modal with the pokemon's name
-        let modalTitle = document.createElement('h2');
-        modalTitle.classList.add('modal-title');
-        modalTitle.innerText = name;
-
-        //create text content for the modal with the pokemon's height in cm
-        let modalContent = document.createElement('p');
-        modalContent.classList.add('modal-content');
-        if(height >= 100){
-            modalContent.innerText = "This Pokemon is " + height / 100 + " m tall.";
-        }
-        else{
-            modalContent.innerText = "This Pokemon is " + height + " cm tall.";
-        }
-        
-
-        //create an image of the pokemon on the modal with appropriate alt text
-        let modalImage = document.createElement('img');
-        modalImage.setAttribute('src', imageUrl);
-        modalImage.setAttribute('alt', "A picture of " + name + ", a pokemon");
-        modalImage.classList.add('modal-image') 
-
-        //append content to the modal
-        modal.appendChild(closeButton);
-        modal.appendChild(modalTitle);
-        modal.appendChild(modalContent);
-        modal.appendChild(modalImage);
-
-        modalContainer.appendChild(modal);
-
-        //make the modal container visible
-        modalContainer.classList.add('is-visible');
-    }
-
-    //makes the modal invisible
-    function hideModal(){
-        let modalContainer = document.querySelector('#modal-container');
-        modalContainer.innerHTML = '';
-        modalContainer.classList.remove('is-visible');
 
     }
 
