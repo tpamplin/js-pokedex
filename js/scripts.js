@@ -93,7 +93,9 @@ let pokemonRepository = (function(){
     };
 
     //builds a modal with a given pokemon's name and height, and a picture of that pokemon
-    function showModal(name, height, imageUrl) {
+    function showModal(pokemon) {
+
+        const {name, height, imageUrl} = pokemon;
 
         //find the modal container and clear it
         let modalContainer = document.querySelector('#modal-container');
@@ -105,7 +107,7 @@ let pokemonRepository = (function(){
         //create close button
         let closeButton = document.createElement('button');
         closeButton.classList.add('modal-close');
-        closeButton.innerText = "X";
+        closeButton.innerText = "Close";
 
         //close the modal when you click the close button
         closeButton.addEventListener('click', hideModal);
@@ -170,7 +172,7 @@ let pokemonRepository = (function(){
     //waits for details to be loaded and adds a modal with details to the DOM
     function showDetails (pokemon){
         loadDetails(pokemon).then(function(){
-            showModal(pokemon.name, pokemon.height, pokemon.imageUrl);
+            showModal(pokemon);
         });
     };
 
