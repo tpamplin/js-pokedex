@@ -42,8 +42,8 @@ let pokemonRepository = (function(){
         let button = document.createElement('button');
         button.innerText = pokemon.name;
         button.classList.add('pokemonButton', 'btn', 'btn-primary');
-        button.setAttribute("data-toggle", "modal");
-        button.setAttribute("data-target", "#detailsModal");
+        button.setAttribute("data-bs-toggle", "modal");
+        button.setAttribute("data-bs-target", "#detailsModal");
         listItem.appendChild(button);
 
         button.addEventListener('click', function(){
@@ -98,6 +98,32 @@ let pokemonRepository = (function(){
 
         const {name, height, imageUrl} = pokemon;
 
+        //Set Modal title
+        let title = $('#detailsModalLabel');
+        title.empty();
+        title.text(name);
+
+        //build modal body
+        let body = $('.modal-body');
+        body.empty();
+
+        let heightText = '';
+        if(height >= 100){
+            heightText = "This Pokemon is " + height / 100 + " m tall.";
+        }
+        else{
+            heightText = "This Pokemon is " + height + " cm tall.";
+        }        
+
+        let heightTextElement = $('<p></p>').text(heightText);
+        body.append(heightTextElement);
+
+        let imageElement = $('<img></img>');
+        imageElement.attr('src', imageUrl);
+        imageElement.attr('alt', 'An image of ' + name + ', a pokemon.');
+        imageElement.addClass('pokemonImage')
+
+        body.append(imageElement);
     }
 
     //waits for details to be loaded and adds a modal with details to the DOM
