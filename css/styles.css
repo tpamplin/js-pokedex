@@ -21,12 +21,11 @@
 
     max-width:50%;
     min-width:30%;
-
 }
 
 body{
     background-color:var(--default-background-color);
-    margin-top:60px;
+    margin-top:80px;
 }
 
 .pokemon-list{
@@ -66,17 +65,23 @@ body{
 
 }
 
-.pokemonButton:active{
-    background-color: var(--button-color);
-
-    border-top: var(--dark-border);
-    border-left: var(--dark-border);
-    border-bottom: var(--light-border);
-    border-right: var(--light-border);
-}
 
 .pokemonImage {
     width:300px;
     max-width: 50%;
+
+}
+
+.navbar {
+    background-color: var(--button-color);
+    border: var(--dark-border);
+}
+
+.pageTitle {
+
+    color: black;
+    margin: auto;
+    font-weight:bold;
+    font-size:36px;
 
 }

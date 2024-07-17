@@ -1,0 +1,82 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v8.4.14,
+* Autoprefixer: v10.4.7
+* Browsers: last 2 version
+*/
+
+.modal {
+    text-align:center;
+}
+
+.modal-dialog {
+    margin: auto;
+
+    max-width:50%;
+    min-width:30%;
+}
+
+body{
+    background-color:#fdfcdc;
+    margin-top:80px;
+}
+
+.pokemon-list{
+    list-style-type:none;
+    padding:0;
+    margin: 10px, auto;
+    text-align:center;
+}
+
+.pokemonButton {
+    background-color: #fed9b7;
+
+    border-top: 3px solid rgba(255, 255, 255, 0.3);
+    border-left: 3px solid rgba(255, 255, 255, 0.3);
+    border-bottom: 3px solid rgba(0, 0, 0, 0.3);
+    border-right: 3px solid rgba(0, 0, 0, 0.3);
+
+    font-size:24px;
+    font-weight:bold;
+    text-align:center;
+
+    width: 30%;
+    min-width:-webkit-fit-content;
+    min-width:-moz-fit-content;
+    min-width:fit-content;
+    margin: 10px;
+    
+    color:black;  
+}
+
+.pokemonButton:hover{
+    color: #8800ff;
+    background-color: #fed9b7;
+
+    border-top: 3px solid rgba(255, 255, 255, 0.3);
+    border-left: 3px solid rgba(255, 255, 255, 0.3);
+    border-bottom: 3px solid rgba(0, 0, 0, 0.3);
+    border-right: 3px solid rgba(0, 0, 0, 0.3);
+
+}
+
+
+.pokemonImage {
+    width:300px;
+    max-width: 50%;
+
+}
+
+.navbar {
+    background-color: #fed9b7;
+    border: 3px solid rgba(0, 0, 0, 0.3);
+}
+
+.pageTitle {
+
+    color: black;
+    margin: auto;
+    font-weight:bold;
+    font-size:36px;
+
+}
