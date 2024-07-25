@@ -3,7 +3,7 @@
 
 let pokemonRepository = (function () {
     let pokemonList = [];
-    let apiUrl = "https://pokeapi.co/api/v2/pokemon/?limit=151";
+    let apiUrl = "https://pokeapi.co/api/v2/pokemon/?limit=30";
 
     //use this function to add pokemon to the pokedex.
     //must be an object with the correct keys.
@@ -22,11 +22,6 @@ let pokemonRepository = (function () {
             //log error message to the console.
             console.log("Invalid: Not an object or keys don't match");
         }
-    }
-
-    //use this function to retrieve the data from the IIFE as an array of pokemon objects, each with a name and url for more details
-    function getAll() {
-        return pokemonList;
     }
 
     //this function creates a button element on the DOM for any given pokemon that it is called on.
@@ -51,11 +46,11 @@ let pokemonRepository = (function () {
     //this function loads a list of pokemon objects, and adds each one to the pokemonList.
     function loadList() {
         return fetch(apiUrl)
-            .then(function (response) {
+            .then((response) => {
                 return response.json();
             })
-            .then(function (json) {
-                json.results.forEach(function (item) {
+            .then((json) => {
+                json.results.forEach((item) => {
                     let pokemon = {
                         name:
                             item.name.charAt(0).toUpperCase() +
@@ -64,8 +59,10 @@ let pokemonRepository = (function () {
                     };
                     add(pokemon);
                 });
+                console.log(pokemonList);
+                return pokemonList;
             })
-            .catch(function (error) {
+            .catch((error) => {
                 console.error(error);
             });
     }
@@ -75,15 +72,15 @@ let pokemonRepository = (function () {
         let url = item.detailsUrl;
 
         return fetch(url)
-            .then(function (response) {
+            .then((response) => {
                 return response.json();
             })
-            .then(function (details) {
+            .then((details) => {
                 item.imageUrl = details.sprites.front_default;
                 item.height = details.height * 10;
                 item.types = details.types;
             })
-            .catch(function (error) {
+            .catch((error) => {
                 console.error(error);
             });
     }
@@ -121,22 +118,21 @@ let pokemonRepository = (function () {
 
     //waits for details to be loaded and adds a modal with details to the DOM
     function showDetails(pokemon) {
-        loadDetails(pokemon).then(function () {
+        loadDetails(pokemon).then(() => {
             showModal(pokemon);
         });
     }
 
     return {
         add: add,
-        getAll: getAll,
         loadList: loadList,
         addListItem: addListItem,
         showModal: showModal,
     };
 })();
 
-pokemonRepository.loadList().then(function () {
-    pokemonRepository.getAll().forEach(function (pokemon) {
+pokemonRepository.loadList().then((pokemon) => {
+    pokemon.forEach((pokemon) => {
         pokemonRepository.addListItem(pokemon);
     });
 });
